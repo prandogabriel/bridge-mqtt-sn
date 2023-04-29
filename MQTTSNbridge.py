@@ -1,10 +1,21 @@
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import MQTTSNclient
 import json
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--port', type=int, help='Port number', default=1885)
+parser.add_argument('--host', type=string, help='Host MQTT-SN',default='localhost')
+parser.add_argument('--topic', type=string, help='Topic',default='sensors')
+args = parser.parse_args()
+
+port = args.port
+host = args.host
+topic = args.topic
 
 # clients for MQTT and MQTTS
 MQTTClient = AWSIoTMQTTClient("MQTTSNbridge")
-MQTTSNClient = MQTTSNclient.Client("bridge", port=1885)
+MQTTSNClient = MQTTSNclient.Client("bridge", port=port, host=host)
 
 class Callback:
   # function that replies a message from the MQTTSN broker to the MQTT one
@@ -51,10 +62,11 @@ while True:
         station_ids += current_id + " "
 
 # subscribe to the topics choosen by the user
-for id in station_ids:
-    MQTTSNClient.subscribe("sensor/station" + id)
-print("Subscribed to stations with ID: " + station_ids)
+#for id in station_ids:
+#    MQTTSNClient.subscribe("sensor/station" + id)
+#print("Subscribed to stations with ID: " + station_ids)
 
+MQTTSNClient.subscribe(topic)
 # cycle that wait for a command to close the program
 while True:
     if input("Enter 'quit' to exit from the program.\n")=="quit":
