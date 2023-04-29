@@ -5,8 +5,8 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--port', type=int, help='Port number', default=1885)
-parser.add_argument('--host', type=string, help='Host MQTT-SN',default='localhost')
-parser.add_argument('--topic', type=string, help='Topic',default='sensors')
+parser.add_argument('--host', help='Host MQTT-SN',default='localhost')
+parser.add_argument('--topic', help='Topic',default='sensors')
 args = parser.parse_args()
 
 port = args.port
