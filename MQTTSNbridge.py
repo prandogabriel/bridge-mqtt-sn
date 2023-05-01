@@ -48,24 +48,6 @@ MQTTSNClient.registerCallback(Callback())
 MQTTClient.connect()
 MQTTSNClient.connect()
 
-# let's ask the user which stations he wants to subscribe to
-# RiotOS MQTTSN clients publish to the topic sensor/station + id
-# the user will define only the id
-#station_ids = ""
-#print("Enter the ID of the station, one by one, that you want to subscribe to.")
-#print("Type 'stop' to interrupt the process.\n")
-#while True:
-#    current_id = input("")
-#    if current_id == 'stop':
-#        break
-#    else:
-#        station_ids += current_id + " "
-
-# subscribe to the topics choosen by the user
-#for id in station_ids:
-#    MQTTSNClient.subscribe("sensor/station" + id)
-#print("Subscribed to stations with ID: " + station_ids)
-
 MQTTSNClient.subscribe(topic)
 # cycle that wait for a command to close the program
 while True:
